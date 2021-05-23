@@ -33,7 +33,7 @@ public class Dentro extends JFrame implements WindowListener, ActionListener, Mo
 		miPanel = new JPanel();
 		miPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(miPanel);
-		miPanel.setLayout(null);
+		miPanel.setLayout(null); 
 		
 		lblConsultas = new JLabel("Consultas");
 		lblConsultas.setBounds(200, 42, 62, 14);
