@@ -1,4 +1,4 @@
-package pruebas;
+package proyecto;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,11 +25,11 @@ public class TablaBBDD extends JFrame {
 	public static void main(String[] args) {
 		
 		//Variables para establecer la conexión con la BBDD
-		String bd = "base";
+		String bd = "proyectoprueba";
 		String url="jdbc:mysql://localhost:3306/" + bd ;
-		
-		String user="manu";
-		String pass="mipass";
+
+		String user="root";
+		String pass="";
 		
 		//Creamos un array para almacenar los nombres de las columnas de la tabla BBDD
 		String nombreColumnas[];
@@ -55,7 +55,7 @@ public class TablaBBDD extends JFrame {
 			//ResultSet.TYPE_SCROLL_INSENSITIVE, nos permite movernos por el resultset adelante y atras
 			//ResultSet.CONCUR_READ_ONLY en modo lectura. No permitiria añadir registros al Statement
 			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY );
-			rs = stmt.executeQuery("Select * from productos");
+			rs = stmt.executeQuery("Select * from animes");
 			
 			//getMetaData() nos devuelve un objeto con info de la tabla SQL a la que hemos realizado
 			//la consulta. Entre ellos el método getColumnCount() para obtener el número de columnas
@@ -119,16 +119,15 @@ public class TablaBBDD extends JFrame {
 		//Creamos y añadimos un panel a nuestro marco
 		miPanel = new JPanel();
 		setContentPane(miPanel);
-		//Sin Layout
 		miPanel.setLayout(null);
 		
 		//Creamos la tabla con la información JTable(info.filas,info.columnas)
 		table = new JTable(datos,nombreColumnas);
+		table.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		
 		//Creamos un JScrollPane (barra de desplazamiento) que contendra la tabla, asi
 		//nuestra tabla tendrá las barras de desplazamiento
 		scrollPane = new JScrollPane(table);
-		//Dar tamaño al JScrollPane(mejor desde la vista de Design)
 		scrollPane.setBounds(0, 0, 786, 563);
 		//Añadimos el JScrollPane al panel, la tabla no hace falta, pues esta dentro del JScrollPane
 		miPanel.add(scrollPane);

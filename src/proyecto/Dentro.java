@@ -1,10 +1,9 @@
+package proyecto;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -13,61 +12,56 @@ import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
 
-public class TablaAnimes extends JFrame implements WindowListener, ActionListener, MouseListener{
+public class Dentro extends JFrame implements WindowListener, ActionListener, MouseListener {
 
 	private JPanel miPanel;
-	private JTable table;
-	private JScrollPane scrollPane;
-	private JButton btnAtrs;
+	private JLabel lblConsultas;
+	private JButton btnAnimes, btnRecomendaciones,btnAtras;
 	/**
 	 * Launch the application.
 	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					TablaAnimes frame = new TablaAnimes();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
+
 
 	/**
 	 * Create the frame.
 	 */
-//	public TablaAnimes(String[] nombreColumnas, String[][] datos) {
-	public TablaAnimes() {
-		//Definimos las propiedades del JFrame
+	public Dentro() {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 600);
-		//Creamos y añadimos un panel a nuestro marco
+		setBounds(100, 100, 482, 298);
 		miPanel = new JPanel();
+		miPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(miPanel);
-		//Sin Layout
 		miPanel.setLayout(null);
 		
-		//Creamos la tabla con la información JTable(info.filas,info.columnas)
-		table = new JTable();
-//		table = new JTable(datos,nombreColumnas);
+		lblConsultas = new JLabel("Consultas");
+		lblConsultas.setBounds(200, 42, 62, 14);
+		miPanel.add(lblConsultas);
 		
-		//Creamos un JScrollPane (barra de desplazamiento) que contendra la tabla, asi
-		//nuestra tabla tendrá las barras de desplazamiento
-		scrollPane = new JScrollPane(table);
-		//Dar tamaño al JScrollPane(mejor desde la vista de Design)
-		scrollPane.setBounds(0, 0, 786, 563);
-		//Añadimos el JScrollPane al panel, la tabla no hace falta, pues esta dentro del JScrollPane
-		miPanel.add(scrollPane);
+		btnRecomendaciones = new JButton("Recomendaciones");
+		btnRecomendaciones.setBounds(78, 127, 123, 23);
+		miPanel.add(btnRecomendaciones);
 		
-		btnAtrs = new JButton("Atr\u00E1s");
-		btnAtrs.addActionListener(this);
+		btnRecomendaciones.addActionListener(this); 
 		
-		scrollPane.setRowHeaderView(btnAtrs);
 		
-		//Hacemos visible la ventana
+		btnAnimes = new JButton("Animes");
+		btnAnimes.setBounds(270, 127, 123, 23);
+		miPanel.add(btnAnimes);
+		
+		btnAnimes.addActionListener(this);
+		
+		
+		btnAtras = new JButton("Atr\u00E1s");
+		btnAtras.setBounds(171, 196, 123, 23);
+		miPanel.add(btnAtras);
+		
+		btnAtras.addActionListener(this);
+		
+		
+		
 		setVisible(true);
 	}
 
@@ -104,11 +98,22 @@ public class TablaAnimes extends JFrame implements WindowListener, ActionListene
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if (e.getSource() == btnAtrs) {
-			System.out.println("aceptar");
+		if (e.getSource() == btnAnimes) {
+			System.out.println("boton Animes");
+			dispose();
+			Tablas ta = new Tablas("Animes");
+			
+		} else if (e.getSource() == btnRecomendaciones) {
+			System.out.println("boton Incorporaciones");
+			dispose();
+			Tablas ti = new Tablas("Recomendaciones");
+			
+		}else if (e.getSource() == btnAtras) {
+			System.out.println("atras");
 			dispose();
 			
-			Dentro d = new Dentro();
+			login l = new login();
+			
 		}
 	}
 
@@ -153,5 +158,4 @@ public class TablaAnimes extends JFrame implements WindowListener, ActionListene
 		// TODO Auto-generated method stub
 		
 	}
-
 }
