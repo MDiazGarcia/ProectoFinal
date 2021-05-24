@@ -10,14 +10,16 @@ import java.awt.event.*;
 import java.sql.*;
 import java.awt.*;
 import javax.swing.ImageIcon;
+import javax.swing.JPasswordField;
 
 
 public class login extends JFrame implements WindowListener, ActionListener, MouseListener{
 
 	private JPanel miPanel;
-	private JTextField textUsuario, textPass;
+	private JTextField textUsuario;
 	private JLabel lblUsuario, lblPass;
 	private JButton btnAceptar, btnRegistrar;
+	private JPasswordField password;
 	
 	/**
 	 * Launch the application.
@@ -62,11 +64,6 @@ public class login extends JFrame implements WindowListener, ActionListener, Mou
 		lblPass.setBounds(101, 162, 87, 20);
 		miPanel.add(lblPass);
 		
-		textPass = new JTextField();
-		textPass.setColumns(10);
-		textPass.setBounds(180, 162, 144, 20);
-		miPanel.add(textPass);
-		
 		btnAceptar = new JButton("Aceptar");
 		btnAceptar.setBounds(270, 213, 89, 23);
 		miPanel.add(btnAceptar);
@@ -82,6 +79,10 @@ public class login extends JFrame implements WindowListener, ActionListener, Mou
 		lblLogo.setIcon(new ImageIcon(login.class.getResource("/proyecto/logo weaboo5,5.png")));
 		lblLogo.setBounds(135, 0, 213, 118);
 		miPanel.add(lblLogo);
+		
+		password = new JPasswordField();
+		password.setBounds(180, 162, 144, 20);
+		miPanel.add(password);
 		
 		btnRegistrar.addActionListener(this);
 		
@@ -145,7 +146,7 @@ public class login extends JFrame implements WindowListener, ActionListener, Mou
 				
 				if(rs.next()) {
 					
-						if(!(textPass.getText().equals(rs.getString("contraseña")))) {
+						if(!(password.getText().equals(rs.getString("contraseña")))) {
 							
 							JOptionPane.showMessageDialog(null, "Contraseña Incorrecta",
 									"Error Contraseña", JOptionPane.WARNING_MESSAGE);
