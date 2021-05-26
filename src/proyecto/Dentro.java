@@ -18,7 +18,7 @@ public class Dentro extends JFrame implements WindowListener, ActionListener, Mo
 
 	private JPanel miPanel;
 	private JLabel lblConsultas;
-	private JButton btnAnimes, btnRecomendaciones,btnAtras;
+	private JButton btnVerTablas, btnIntroducir,btnAtras;
 	/**
 	 * Launch the application.
 	 */
@@ -40,18 +40,18 @@ public class Dentro extends JFrame implements WindowListener, ActionListener, Mo
 		lblConsultas.setBounds(200, 42, 62, 14);
 		miPanel.add(lblConsultas);
 		
-		btnRecomendaciones = new JButton("Recomendaciones");
-		btnRecomendaciones.setBounds(78, 127, 123, 23);
-		miPanel.add(btnRecomendaciones);
+		btnIntroducir = new JButton("Introducir Datos");
+		btnIntroducir.setBounds(72, 127, 129, 23);
+		miPanel.add(btnIntroducir);
 		
-		btnRecomendaciones.addActionListener(this); 
+		btnIntroducir.addActionListener(this); 
 		
 		
-		btnAnimes = new JButton("Animes");
-		btnAnimes.setBounds(270, 127, 123, 23);
-		miPanel.add(btnAnimes);
+		btnVerTablas = new JButton("Ver Tablas");
+		btnVerTablas.setBounds(270, 127, 123, 23);
+		miPanel.add(btnVerTablas);
 		
-		btnAnimes.addActionListener(this);
+		btnVerTablas.addActionListener(this);
 		
 		
 		btnAtras = new JButton("Atr\u00E1s");
@@ -98,21 +98,21 @@ public class Dentro extends JFrame implements WindowListener, ActionListener, Mo
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if (e.getSource() == btnAnimes) {
-			System.out.println("boton Animes");
+		if (e.getSource() == btnVerTablas) {
+			System.out.println("boton Ver Tablas");
 			dispose();
-			Tablas ta = new Tablas("Animes");
+			SelectTabla st = new SelectTabla();
 			
-		} else if (e.getSource() == btnRecomendaciones) {
+		} else if (e.getSource() == btnIntroducir) {
 			System.out.println("boton Incorporaciones");
 			dispose();
-			Tablas ti = new Tablas("Recomendaciones");
+			SelecInsert ti = new SelecInsert();
 			
 		}else if (e.getSource() == btnAtras) {
 			System.out.println("atras");
 			dispose();
 			
-			login l = new login();
+			Login l = new Login();
 			
 		}
 	}

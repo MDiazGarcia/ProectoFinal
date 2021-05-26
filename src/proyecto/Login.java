@@ -13,7 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPasswordField;
 
 
-public class login extends JFrame implements WindowListener, ActionListener, MouseListener{
+public class Login extends JFrame implements WindowListener, ActionListener, MouseListener{
 
 	private JPanel miPanel;
 	private JTextField textUsuario;
@@ -21,26 +21,11 @@ public class login extends JFrame implements WindowListener, ActionListener, Mou
 	private JButton btnAceptar, btnRegistrar;
 	private JPasswordField password;
 	
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					login frame = new login();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 
 	/**
 	 * Create the frame.
 	 */
-	public login() {
+	public Login() {
 		
 		setEnabled(true);
 		
@@ -76,7 +61,7 @@ public class login extends JFrame implements WindowListener, ActionListener, Mou
 		miPanel.add(btnRegistrar);
 		
 		JLabel lblLogo = new JLabel("");
-		lblLogo.setIcon(new ImageIcon(login.class.getResource("/proyecto/logo weaboo5,5.png")));
+		lblLogo.setIcon(new ImageIcon(Login.class.getResource("/proyecto/logo weaboo5,5.png")));
 		lblLogo.setBounds(135, 0, 213, 118);
 		miPanel.add(lblLogo);
 		
@@ -141,7 +126,7 @@ public class login extends JFrame implements WindowListener, ActionListener, Mou
 				conn = DriverManager.getConnection(url,user,pasw);
 				stmt = conn.createStatement();
 				
-				boolean flag=false;
+				
 				rs = stmt.executeQuery("Select * from usuarios where nickname like '"+textUsuario.getText()+"'");
 				
 				if(rs.next()) {
@@ -151,13 +136,13 @@ public class login extends JFrame implements WindowListener, ActionListener, Mou
 							JOptionPane.showMessageDialog(null, "Contraseña Incorrecta",
 									"Error Contraseña", JOptionPane.WARNING_MESSAGE);
 							
-							flag= true;
+							
 						}else {
 							
 							dispose();
 							
 							Dentro d = new Dentro();
-							flag=false;
+							
 						}
 						
 					
@@ -180,7 +165,7 @@ public class login extends JFrame implements WindowListener, ActionListener, Mou
 		} else if (e.getSource() == btnRegistrar) {
 			System.out.println("registrar");
 			dispose();
-			registro r = new registro();
+			Registro r = new Registro();
 		}
 		
 	}

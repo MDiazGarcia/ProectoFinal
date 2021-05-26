@@ -7,15 +7,21 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-public class registro extends JFrame implements WindowListener, ActionListener, MouseListener{
+public class Registro extends JFrame implements WindowListener, ActionListener, MouseListener{
 
 	private JPanel miPanel;
 	private JTextField textUsuario, textNombre, textCorreo, textPass;
@@ -24,23 +30,12 @@ public class registro extends JFrame implements WindowListener, ActionListener, 
 	/**
 	 * Launch the application.
 	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					registro frame = new registro();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
+
 
 	/**
 	 * Create the frame.
 	 */
-	public registro() {
+	public Registro() {
 		
 		setEnabled(true);
 		
@@ -131,16 +126,71 @@ public class registro extends JFrame implements WindowListener, ActionListener, 
 		// TODO Auto-generated method stub
 		
 		if (e.getSource() == btnAceptar) {
-			System.out.println("aceptar");
 			
+			if(textUsuario.getText().equals("") || textNombre.getText().equals("") || 
+					textCorreo.getText().equals("") || textPass.getText().equals("")) {
+			
+				JOptionPane.showMessageDialog(null, "Un campo esta vacio",
+						"Campo vacio", JOptionPane.WARNING_MESSAGE);
+				
+			}else {
+				String bd ="proyecto";
+				String url="jdbc:mysql://localhost:3306/"+bd;
+			
+				String user="root";
+				String pasw="";
+			
+				Connection conn= null;
+				Statement stmt=null;
+				ResultSet rs=null;
+			
+				try {
+				
+				
+					Class.forName("com.mysql.cj.jdbc.Driver");
+					conn = DriverManager.getConnection(url,user,pasw);
+					stmt = conn.createStatement();
+					
+					boolean flag=false;
+					rs = stmt.executeQuery("Select * from usuarios where nickname like '"+textUsuario.getText()+"'");
+					if(rs.next()) {
+						
+						JOptionPane.showMessageDialog(null, "El usuario ya existe",
+								"Usuario existente", JOptionPane.WARNING_MESSAGE);
+					}else {
+						
+						stmt.executeUpdate("insert into usuarios values('"+textUsuario.getText()+"','"+
+						textNombre.getText()+"','"+textCorreo.getText()+"','"+textPass.getText()+"',0)");
+						
+						JOptionPane.showMessageDialog(null, "Usuario creado",
+								"Usuario creado", JOptionPane.INFORMATION_MESSAGE);
+						
+						dispose();
+						Login l= new Login();
+					}
+					rs.close();
+					stmt.close();
+					conn.close();
+			}catch (ClassNotFoundException e1) {
+							
+				e1.printStackTrace();
+			}catch (SQLException e1) {
+							
+				e1.printStackTrace();
+			}
+			
+			
+			
+			System.out.println("aceptar");
+			}	
 		}if (e.getSource() == btnAtras) {
 			System.out.println("Atras");
 			dispose();
 			
-			login l = new login();
+			Login l = new Login();
 		}
-		
 	}
+	
 	@Override
 	public void windowActivated(WindowEvent arg0) {
 		// TODO Auto-generated method stub

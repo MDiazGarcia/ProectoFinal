@@ -1,10 +1,10 @@
 package proyecto;
 
-public class principal {
+public class Principal {
 
 	public static void main(String[]args) {
 		
-		login l = new login();
+		Login l = new Login();
 		
 	}
 }
